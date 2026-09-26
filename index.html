@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="es"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso al Campus | IDEP Campus Virtual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Barlow:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --idep-green: #00792f;
+      --idep-green-700: #005f25;
+      --idep-green-900: #003d18;
+      --idep-green-50: #e8f5ec;
+      --idep-mint: #e5ffe5;
+      --ink: #0b0f0c;
+      --ink-700: #2b322d;
+      --ink-500: #5f6b63;
+      --line: #d6ddd8;
+      --white: #ffffff;
+      --danger: #c62828;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      color: var(--ink-700);
+      background-color: var(--idep-mint);
+      background-image: url('images/fondocampus.png');
+      background-repeat: repeat;
+      background-size: 540px auto;
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .top-band {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 46vh;
+      background: linear-gradient(180deg, var(--idep-green-900) 0%, var(--idep-green) 100%);
+      opacity: 0.92;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+      z-index: 0;
+    }
+
+    .header-text {
+      position: relative;
+      padding: 28px 16px 0;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .login-card {
+      background: var(--white);
+      width: 100%;
+      max-width: 460px;
+      border-radius: 20px;
+      box-shadow: 0 24px 60px -20px rgba(0,61,24,.35), 0 2px 6px rgba(0,0,0,.06);
+      padding: 36px 40px 32px;
+      animation: slideUp 400ms ease-out forwards;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      width: 248px;
+      height: auto;
+      max-width: 100%;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: var(--line);
+      margin-bottom: 20px;
+    }
+
+    .ribbon-tag {
+      display: inline-block;
+      background-color: var(--ink);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 16px 4px 12px;
+      clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--ink-500);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-700);
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      stroke: var(--ink-500);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .input-action {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .input-action svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--ink-500);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      height: 52px;
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: 0 44px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      color: var(--ink-700);
+      transition: all 150ms ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+      outline: none;
+      border-color: var(--idep-green);
+      box-shadow: 0 0 0 4px var(--idep-green-50);
+    }
+
+    input::placeholder {
+      color: #9aa59e;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox-wrapper input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--idep-green);
+      cursor: pointer;
+    }
+
+    .checkbox-wrapper label {
+      margin-bottom: 0;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: var(--idep-green);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: text-decoration 150ms ease;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    .btn-primary {
+      width: 100%;
+      height: 52px;
+      background-color: var(--idep-green);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 150ms ease;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary:focus-visible,
+    .input-action:focus-visible,
+    .forgot-link:focus-visible,
+    .help-text a:focus-visible {
+      outline: 2px solid var(--idep-green);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--idep-green-700);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .help-text {
+      text-align: center;
+      font-size: 13px;
+      color: var(--ink-500);
+    }
+
+    .help-text a {
+      color: var(--idep-green);
+      text-decoration: none;
+    }
+
+    .help-text a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      background-color: var(--ink);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      z-index: 1;
+    }
+
+    .footer-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      flex: 1;
+    }
+
+    .institutes-img {
+      max-width: 100%;
+      max-height: 48px;
+      filter: invert(1);
+    }
+
+    .copyright {
+      flex: 1;
+      text-align: right;
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background-size: 360px auto;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 14px;
+        padding: 24px 16px;
+        text-align: center;
+      }
+      .copyright {
+        text-align: center;
+      }
+      .form-row {
+        flex-wrap: wrap;
+      }
+      .top-band {
+        height: 34vh;
+      }
+      .header-text {
+        display: none;
+      }
+      .login-card {
+        padding: 24px;
+      }
+      .logo-container img {
+        width: 220px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .institutes-img {
+        max-height: none;
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .login-card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      .btn-primary:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-band"></div>
+  
+  <div class="header-text">
+    Instituto de Estudios sobre Estado y Participación · ATE Provincia de Buenos Aires
+  </div>
+
+  <main class="main-content">
+    <div class="login-card">
+      <div class="logo-container">
+        <img src="images/campusLogoSolo.png" alt="IDEP Campus Virtual">
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="ribbon-tag">ACCESO AL CAMPUS</div>
+      
+      <h1>Bienvenida/o de nuevo</h1>
+      <p class="subtitle">Ingresá con tu usuario y contraseña para acceder a tus cursos.</p>
+
+      <form action="#">
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input type="text" id="username" placeholder="DNI o nombre de usuario" required="">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" id="password" placeholder="Tu contraseña" required="">
+            <button type="button" class="input-action" aria-label="Mostrar contraseña">
+              <svg viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="remember">
+            <label for="remember">Recordar usuario</label>
+          </div>
+          <a id="forgot-password-link" href="#" class="forgot-link">¿Olvidó su contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn-primary">
+          INGRESAR
+          <svg viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+
+      <p class="help-text">
+        ¿Problemas para ingresar? Escribinos a <a id="help-email-link" href="mailto:campus@idep.org.ar">campus@idep.org.ar</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-label">Nuestros institutos</div>
+    <img class="institutes-img" src="images/institutos-fila.png" alt="Institutos IDEP">
+    <div class="copyright">© 2026 IDEP — CTA Autónoma</div>
+  </footer>
+
+  <script>
+    // Mostrar / ocultar contraseña (solo maqueta)
+    document.querySelector('.input-action').addEventListener('click', function () {
+      var input = document.getElementById('password');
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      this.setAttribute('aria-label', show ? 'Ocultar contraseña' : 'Mostrar contraseña');
+    });
+  </script>
+</div>
+
+
+</body></html>

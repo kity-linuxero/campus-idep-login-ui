@@ -1,0 +1,3 @@
+# Superdesign: solo se versiona el sistema de diseño (los assets son copia de images/)
+.superdesign/*
+!.superdesign/design-system.md
