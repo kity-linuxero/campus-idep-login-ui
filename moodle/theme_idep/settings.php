@@ -1,6 +1,6 @@
 <?php
-// Ajustes del tema "idep": banner de campaña del login (hoy Enrédate 26) y
-// mail de ayuda. Se editan en Administración del sitio → Apariencia → Temas → IDEP.
+// Ajustes del tema "idep": banner de campaña del login (hoy Enrédate 26).
+// Se editan en Administración del sitio → Apariencia → Temas → IDEP.
 defined('MOODLE_INTERNAL') || die();
 
 // En Moodle 5.2 appearance.php crea la página del tema oculta y solo la agrega
@@ -30,10 +30,4 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('theme_idep/banneralt',
         get_string('banneralt', 'theme_idep'), get_string('banneralt_desc', 'theme_idep'), '', PARAM_TEXT));
-
-    $settings->add(new admin_setting_heading('theme_idep/helpheading',
-        get_string('helpheading', 'theme_idep'), ''));
-
-    $settings->add(new admin_setting_configtext('theme_idep/helpemail',
-        get_string('helpemail', 'theme_idep'), get_string('helpemail_desc', 'theme_idep'), '', PARAM_EMAIL));
 }

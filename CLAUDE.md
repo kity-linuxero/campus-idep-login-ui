@@ -32,4 +32,6 @@ Login del Campus Virtual IDEP (Moodle 5.2). Dos piezas que tienen que mantenerse
 
 Para iterar el diseño con Superdesign, usar la skill en `.claude/skills/superdesign/` y los IDs de proyecto/draft de `prompts/superdesign-login.md`.
 
-El banner de campaña (imagen, enlace, fecha de fin) y el mail de ayuda son ajustes del tema en la administración de Moodle: no requieren cambios de código.
+El banner de campaña (imagen, enlace, fecha de fin) es un ajuste del tema en la administración de Moodle: no requiere cambios de código.
+
+La tarjeta tiene que entrar completa en una pantalla de celular: por eso no lleva etiqueta "ACCESO AL CAMPUS", subtítulo ni línea de ayuda. No volver a agregar texto sin revisar la vista a 390 px.

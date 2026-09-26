@@ -2,8 +2,8 @@
     @template core/loginform
 
     Override de theme_idep: formulario de login con el diseño del Campus IDEP
-    (etiqueta "ACCESO AL CAMPUS", inputs con íconos, mostrar/ocultar
-    contraseña, botón INGRESAR). Conserva todo lo funcional del core
+    (título, inputs con íconos, mostrar/ocultar contraseña, botón INGRESAR).
+    Conserva todo lo funcional del core
     (token, errores, mantenimiento, recaptcha, proveedores de identidad,
     alta de cuenta e invitado si se habilitan). Sin selector de idioma ni
     aviso de cookies. El logo lo pone la página (theme_idep/login).
@@ -20,9 +20,7 @@
     }
 }}
 <div class="idep-loginform">
-    <div class="idep-ribbon">{{#str}}accesstag, theme_idep{{/str}}</div>
     <h1 class="idep-title">{{#str}}welcome, theme_idep{{/str}}</h1>
-    <p class="idep-subtitle">{{#str}}subtitle, theme_idep{{/str}}</p>
 
     {{#maintenance}}
         <div class="idep-alert idep-alert--danger login-maintenance">{{{maintenance}}}</div>

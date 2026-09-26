@@ -115,33 +115,13 @@
       margin-bottom: 20px;
     }
 
-    .ribbon-tag {
-      display: inline-block;
-      background-color: var(--ink);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 16px 4px 12px;
-      clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
-      margin-bottom: 16px;
-    }
-
     h1 {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 36px;
       font-weight: 700;
       color: var(--ink);
       line-height: 1.05;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: var(--ink-500);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .form-group {
@@ -271,13 +251,11 @@
       justify-content: center;
       gap: 8px;
       transition: all 150ms ease;
-      margin-bottom: 20px;
     }
 
     .btn-primary:focus-visible,
     .input-action:focus-visible,
-    .forgot-link:focus-visible,
-    .help-text a:focus-visible {
+    .forgot-link:focus-visible {
       outline: 2px solid var(--idep-green);
       outline-offset: 3px;
       border-radius: 6px;
@@ -294,21 +272,6 @@
       stroke: currentColor;
       stroke-width: 2.5;
       fill: none;
-    }
-
-    .help-text {
-      text-align: center;
-      font-size: 13px;
-      color: var(--ink-500);
-    }
-
-    .help-text a {
-      color: var(--idep-green);
-      text-decoration: none;
-    }
-
-    .help-text a:hover {
-      text-decoration: underline;
     }
 
     .footer {
@@ -413,10 +376,8 @@
       
       <div class="divider"></div>
       
-      <div class="ribbon-tag">ACCESO AL CAMPUS</div>
       
       <h1>Bienvenida/o de nuevo</h1>
-      <p class="subtitle">Ingresá con tu usuario y contraseña para acceder a tus cursos.</p>
 
       <form action="#">
         <div class="form-group">
@@ -463,10 +424,6 @@
           </svg>
         </button>
       </form>
-
-      <p class="help-text">
-        ¿Problemas para ingresar? Escribinos a <a id="help-email-link" href="mailto:campus@idep.org.ar">campus@idep.org.ar</a>
-      </p>
     </div>
   </main>
 

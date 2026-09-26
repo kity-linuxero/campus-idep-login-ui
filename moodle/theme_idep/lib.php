@@ -152,33 +152,13 @@ body.idep-login-page .idep-divider {
     margin-bottom: 20px;
 }
 
-body.idep-login-page .idep-ribbon {
-    display: inline-block;
-    background: var(--idep-ink);
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    padding: 4px 16px 4px 12px;
-    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-    margin-bottom: 16px;
-}
-
 body.idep-login-page .idep-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 36px;
     font-weight: 700;
     color: var(--idep-ink);
     line-height: 1.05;
-    margin: 0 0 8px;
-}
-
-body.idep-login-page .idep-subtitle {
-    font-size: 16px;
-    color: var(--idep-ink-500);
-    margin: 0 0 24px;
+    margin: 0 0 20px;
 }
 
 body.idep-login-page .idep-alert {
@@ -339,6 +319,11 @@ body.idep-login-page .idep-btn:hover {
     background: var(--idep-green-700);
     color: #fff;
     transform: translateY(-1px);
+}
+
+/* El botón INGRESAR es lo último de la tarjeta: sin margen extra abajo. */
+body.idep-login-page .idep-form .idep-btn {
+    margin-bottom: 0;
 }
 
 body.idep-login-page .idep-btn svg {

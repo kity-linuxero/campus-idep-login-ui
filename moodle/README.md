@@ -7,7 +7,7 @@ que reemplaza solo la pantalla de login. Todo lo demás del campus sigue siendo 
 moodle/
   theme_idep/                         Plugin de Moodle (va en public/theme/idep del servidor)
     config.php                        Declara boost como padre y el layout de login propio
-    layout/login.php                  Arma el contexto: banner (con fecha de fin), mail de ayuda, año
+    layout/login.php                  Arma el contexto: banner (con fecha de fin), año
     templates/login.mustache          Página: banda verde, tarjeta, banner, footer con institutos
     templates/core/loginform.mustache Formulario (override de core/loginform)
     lib.php                           Todo el CSS del login (theme_idep_get_extra_scss) + fuentes
@@ -24,8 +24,7 @@ moodle/
 | En `index.html` | En Moodle |
 |---|---|
 | Banda verde, encabezado, tarjeta, logo, divisor, footer | `templates/login.mustache` |
-| Etiqueta "ACCESO AL CAMPUS", título, subtítulo, formulario, "¿Olvidó…?", botón | `templates/core/loginform.mustache` |
-| Línea de ayuda con el mail | `templates/login.mustache` (el mail es un ajuste) |
+| Título, formulario, "¿Olvidó…?", botón | `templates/core/loginform.mustache` |
 | El `<style>` | `lib.php` → `theme_idep_get_extra_scss()` |
 | Textos | `lang/es/theme_idep.php` |
 | `images/*.png` | se sirven en `/branding/` (los copia `deploy.sh`) |
@@ -41,17 +40,18 @@ Las clases de la maqueta se renombraron con prefijo `idep-` porque varias chocan
 | `.main-content` | `.idep-main` | | `input` | `.idep-input` |
 | `.login-card` | `.idep-card` | | `.forgot-link` | `.idep-link` |
 | `.logo-container` | `.idep-logo` | | `.btn-primary` | `.idep-btn` |
-| `.divider` | `.idep-divider` | | `.help-text` | `.idep-help` |
-| `.ribbon-tag` | `.idep-ribbon` | | `.footer` | `.idep-footer` |
+| `.divider` | `.idep-divider` | | `.footer` | `.idep-footer` |
 | `h1` | `.idep-title` | | `.institutes-img` | `.idep-institutes` |
-| `.subtitle` | `.idep-subtitle` | | `.copyright` | `.idep-copyright` |
+| | | | `.copyright` | `.idep-copyright` |
 
 Diferencias deliberadas con la maqueta:
 
 - **Sin "Recordar usuario"**: Moodle 5.2 ya no tiene esa opción por usuario; con la configuración
   del sitio el usuario se recuerda siempre.
 - **Fuentes servidas desde el propio servidor** (`/branding/fonts/`), sin pedidos a Google Fonts.
-- **Banner de campaña** y **mail de ayuda** son ajustes del tema, no código.
+- **Banner de campaña**: es un ajuste del tema, no código.
+- **Sin etiqueta "ACCESO AL CAMPUS", subtítulo ni línea de ayuda**: se sacaron para que la tarjeta entre
+  completa en una pantalla de celular.
 
 ## Cambios que NO necesitan tocar código
 
@@ -59,7 +59,6 @@ Diferencias deliberadas con la maqueta:
 
 - **Banner de campaña**: mostrar sí/no, **"Mostrar hasta"** (`AAAA-MM-DD HH:MM`, hora del sitio; pasada esa fecha
   se oculta solo), imagen (vertical, ~4:5), enlace y texto alternativo.
-- **Mail de ayuda**: vacío oculta la línea "¿Problemas para ingresar?".
 
 ## Si alguien sugiere un cambio en el login
 

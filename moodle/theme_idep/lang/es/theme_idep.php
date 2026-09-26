@@ -7,16 +7,13 @@ $string['configtitle'] = 'IDEP';
 
 // Página de login.
 $string['headertext'] = 'Instituto de Estudios sobre Estado y Participación · ATE Provincia de Buenos Aires';
-$string['accesstag'] = 'Acceso al campus';
 $string['welcome'] = 'Bienvenida/o de nuevo';
-$string['subtitle'] = 'Ingresá con tu usuario y contraseña para acceder a tus cursos.';
 $string['usernamelabel'] = 'Usuario';
 $string['usernameplaceholder'] = 'DNI o nombre de usuario';
 $string['passwordplaceholder'] = 'Tu contraseña';
 $string['showpassword'] = 'Mostrar contraseña';
 $string['hidepassword'] = 'Ocultar contraseña';
 $string['loginbutton'] = 'Ingresar';
-$string['helptext'] = '¿Problemas para ingresar? Escribinos a';
 $string['institutes'] = 'Nuestros institutos';
 $string['institutesalt'] = 'Institutos IDEP: IDEP Salud, CFP 410, IDEP Informática y CENS 453';
 
@@ -33,6 +30,3 @@ $string['bannerurl'] = 'Enlace del banner';
 $string['bannerurl_desc'] = 'Opcional. Al hacer clic en el banner se abre este enlace en una pestaña nueva.';
 $string['banneralt'] = 'Texto alternativo del banner';
 $string['banneralt_desc'] = 'Descripción breve del banner para lectores de pantalla.';
-$string['helpheading'] = 'Ayuda';
-$string['helpemail'] = 'Mail de ayuda';
-$string['helpemail_desc'] = 'Se muestra debajo del formulario de login. Dejalo vacío para ocultar la línea de ayuda.';

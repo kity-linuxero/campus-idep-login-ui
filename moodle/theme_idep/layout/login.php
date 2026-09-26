@@ -34,7 +34,6 @@ $templatecontext = [
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes,
     'banner' => $banner,
-    'helpemail' => get_config('theme_idep', 'helpemail') ?: null,
     'year' => date('Y'),
 ];
 

@@ -39,9 +39,9 @@ moodle/                        Implementación en Moodle 5.2 (ver moodle/README.
 - **Fondo**: patrón institucional tileado (`fondocampus.png`, 540px; 360px en mobile) con una banda
   verde superior (`#003d18 → #00792f`, 92% de opacidad) cortada en diagonal, como la cinta negra del logo.
 - **Tarjeta única centrada** (máx. 460px, radio 20px) montada sobre el borde de la banda:
-  logo sobre blanco → divisor → etiqueta negra inclinada "ACCESO AL CAMPUS" → título → formulario.
+  logo sobre blanco → divisor → título → formulario.
 - **Formulario**: Usuario, Contraseña (con mostrar/ocultar), "Recordar usuario",
-  "¿Olvidó su contraseña?", botón **INGRESAR** y línea de ayuda.
+  "¿Olvidó su contraseña?" y botón **INGRESAR**.
 - **Footer** negro con la fila de institutos invertida a blanco (`filter: invert(1)`).
 - Sin selector de idioma, aviso de cookies, estadísticas genéricas ni acceso de invitados.
 
@@ -68,7 +68,7 @@ moodle/                        Implementación en Moodle 5.2 (ver moodle/README.
 El login ya está implementado en el tema **`theme_idep`** (tema hijo de Boost, Moodle 5.2). Detalles, mapeo
 maqueta → plantillas, trampas conocidas y verificación: **[`moodle/README.md`](moodle/README.md)**.
 
-- **Banner de campaña y mail de ayuda** se cambian desde la administración, sin código:
+- **El banner de campaña** se cambia desde la administración, sin código:
   *Administración del sitio → Apariencia → Temas → IDEP*. El banner tiene fecha de fin ("Mostrar hasta").
 - **Si te sugieren un cambio en el login:**
   1. probalo primero en `index.html` (y regenerá las capturas);

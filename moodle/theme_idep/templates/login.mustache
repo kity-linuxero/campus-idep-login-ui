@@ -16,7 +16,6 @@
             "main_content": "<h1>Form</h1>"
         },
         "banner": {"imageurl": "banner.jpg", "linkurl": "https://example.com", "alt": "Campaña"},
-        "helpemail": "campus@example.com",
         "year": "2026"
     }
 }}
@@ -40,9 +39,6 @@
             </div>
             <div class="idep-divider"></div>
             {{{ output.main_content }}}
-            {{#helpemail}}
-                <p class="idep-help">{{#str}}helptext, theme_idep{{/str}} <a href="mailto:{{helpemail}}">{{helpemail}}</a></p>
-            {{/helpemail}}
         </div>
         {{#banner}}
             <aside class="idep-banner">
