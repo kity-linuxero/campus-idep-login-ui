@@ -27,7 +27,7 @@ find $MOODLE/public/theme/idep -type f -exec chmod 640 {} +
 "
 
 echo "==> Assets -> CT $CTID:$BRANDING"
-tar -C "$REPO" -cf - images/campusLogoSolo.png images/fondocampus.png images/institutos-fila.png \
+tar -C "$REPO" -cf - images/campusLogoSolo.png images/campusLogoCompleto.png images/fondocampus.png images/institutos-fila.png \
     -C "$REPO/moodle/branding" fonts | pct exec "$CTID" -- bash -c "
 set -e
 rm -rf /tmp/brandingdeploy && mkdir -p /tmp/brandingdeploy && tar -C /tmp/brandingdeploy -xf -
