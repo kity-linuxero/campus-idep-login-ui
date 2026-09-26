@@ -1,0 +1,75 @@
+{{!
+    @template theme_idep/login
+
+    Página de login del Campus Virtual IDEP (diseño campus-idep-login-ui).
+    Banda verde diagonal sobre el patrón ATE/CTA, tarjeta única con el logo
+    y el formulario (output.main_content = core/loginform), banner de
+    campaña opcional al costado y footer negro con los institutos.
+
+    Example context (json):
+    {
+        "sitename": "Campus IDEP",
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Login",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Form</h1>"
+        },
+        "banner": {"imageurl": "banner.jpg", "linkurl": "https://example.com", "alt": "Campaña"},
+        "helpemail": "campus@example.com",
+        "year": "2026"
+    }
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+
+<div id="page-wrapper" class="idep-login">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    <div class="idep-top-band" aria-hidden="true"></div>
+
+    <div class="idep-header-text">{{#str}}headertext, theme_idep{{/str}}</div>
+
+    <main class="idep-main{{#banner}} idep-main--with-banner{{/banner}}">
+        <div class="idep-card">
+            <div class="idep-logo">
+                <img src="/branding/campusLogoSolo.png" alt="{{sitename}}">
+            </div>
+            <div class="idep-divider"></div>
+            {{{ output.main_content }}}
+            {{#helpemail}}
+                <p class="idep-help">{{#str}}helptext, theme_idep{{/str}} <a href="mailto:{{helpemail}}">{{helpemail}}</a></p>
+            {{/helpemail}}
+        </div>
+        {{#banner}}
+            <aside class="idep-banner">
+                {{#linkurl}}<a href="{{linkurl}}" target="_blank" rel="noopener">{{/linkurl}}
+                    <img src="{{imageurl}}" alt="{{alt}}">
+                {{#linkurl}}</a>{{/linkurl}}
+            </aside>
+        {{/banner}}
+    </main>
+
+    <footer class="idep-footer">
+        <div class="idep-footer-label">{{#str}}institutes, theme_idep{{/str}}</div>
+        <img class="idep-institutes" src="/branding/institutos-fila.png" alt="{{#str}}institutesalt, theme_idep{{/str}}">
+        <div class="idep-copyright">&copy; {{year}} IDEP — CTA Autónoma</div>
+    </footer>
+
+    <div class="d-none">
+        {{{ output.standard_footer_html }}}
+    </div>
+    {{{ output.standard_end_of_body_html }}}
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+  M.util.js_complete('theme_boost/loader');
+});
+{{/js}}

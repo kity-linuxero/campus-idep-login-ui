@@ -1,0 +1,166 @@
+{{!
+    @template core/loginform
+
+    Override de theme_idep: formulario de login con el diseño del Campus IDEP
+    (etiqueta "ACCESO AL CAMPUS", inputs con íconos, mostrar/ocultar
+    contraseña, botón INGRESAR). Conserva todo lo funcional del core
+    (token, errores, mantenimiento, recaptcha, proveedores de identidad,
+    alta de cuenta e invitado si se habilitan). Sin selector de idioma ni
+    aviso de cookies. El logo lo pone la página (theme_idep/login).
+
+    Example context (json):
+    {
+        "loginurl": "https://example.com/login/index.php",
+        "forgotpasswordurl": "https://example.com/login/forgot_password.php",
+        "logintoken": "randomstring",
+        "username": "",
+        "showloginform": true,
+        "error": "",
+        "info": ""
+    }
+}}
+<div class="idep-loginform">
+    <div class="idep-ribbon">{{#str}}accesstag, theme_idep{{/str}}</div>
+    <h1 class="idep-title">{{#str}}welcome, theme_idep{{/str}}</h1>
+    <p class="idep-subtitle">{{#str}}subtitle, theme_idep{{/str}}</p>
+
+    {{#maintenance}}
+        <div class="idep-alert idep-alert--danger login-maintenance">{{{maintenance}}}</div>
+    {{/maintenance}}
+    {{#error}}
+        <div class="idep-alert idep-alert--danger" id="loginerrormessage" role="alert">
+            {{#errortitle}}<strong class="d-block mb-1">{{errortitle}}</strong>{{/errortitle}}
+            {{error}}
+        </div>
+    {{/error}}
+    {{#info}}
+        <div class="idep-alert idep-alert--info" id="logininfomessage" role="status">{{info}}</div>
+    {{/info}}
+
+    {{#showloginform}}
+        <form class="login-form idep-form" action="{{loginurl}}" method="post" id="login">
+            <input id="anchor" type="hidden" name="anchor" value="">
+            <script>document.getElementById('anchor').value = location.hash;</script>
+            <input type="hidden" name="logintoken" value="{{logintoken}}">
+
+            <div class="idep-field">
+                <label for="username" class="idep-label">
+                    {{^canloginbyemail}}{{#str}}usernamelabel, theme_idep{{/str}}{{/canloginbyemail}}
+                    {{#canloginbyemail}}{{#str}} usernameemail {{/str}}{{/canloginbyemail}}
+                </label>
+                <div class="idep-input-wrap">
+                    <svg class="idep-input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input type="text" name="username" id="username" class="idep-input"
+                        value="{{username}}" placeholder="{{#str}}usernameplaceholder, theme_idep{{/str}}"
+                        autocomplete="username" autocapitalize="none" spellcheck="false" required>
+                </div>
+            </div>
+
+            <div class="idep-field">
+                <label for="password" class="idep-label">{{#str}} password {{/str}}</label>
+                <div class="idep-input-wrap">
+                    <svg class="idep-input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <input type="password" name="password" id="password" class="idep-input idep-input--action"
+                        value="" placeholder="{{#str}}passwordplaceholder, theme_idep{{/str}}"
+                        autocomplete="current-password" required>
+                    <button type="button" class="idep-pass-toggle" aria-controls="password" aria-pressed="false"
+                        aria-label="{{#str}}showpassword, theme_idep{{/str}}"
+                        data-label-show="{{#str}}showpassword, theme_idep{{/str}}"
+                        data-label-hide="{{#str}}hidepassword, theme_idep{{/str}}">
+                        <svg class="idep-eye" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg class="idep-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path>
+                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="idep-form-row">
+                <a class="idep-link" href="{{forgotpasswordurl}}">{{#str}}loginforgotpassword{{/str}}</a>
+            </div>
+
+            {{#recaptcha}}
+                <div class="login-form-recaptcha mb-3">{{{recaptcha}}}</div>
+            {{/recaptcha}}
+
+            <button class="idep-btn" type="submit" id="loginbtn">
+                {{#str}}loginbutton, theme_idep{{/str}}
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </form>
+    {{/showloginform}}
+
+    {{#cansignup}}
+        <p class="idep-help"><a class="idep-link" href="{{signupurl}}">{{#str}}loginstartsignup{{/str}}</a></p>
+    {{/cansignup}}
+
+    {{#hasidentityproviders}}
+        <div class="idep-providers">
+            {{#identityproviders}}
+                <a class="idep-btn idep-btn--outline" href="{{url}}">
+                    {{#iconurl}}<img src="{{iconurl}}" alt="" width="20" height="20">{{/iconurl}}
+                    {{#str}}loginwith, core, {{name}}{{/str}}
+                </a>
+            {{/identityproviders}}
+        </div>
+    {{/hasidentityproviders}}
+
+    {{#canloginasguest}}
+        <form action="{{loginurl}}" method="post" id="guestlogin" class="idep-providers">
+            <input type="hidden" name="logintoken" value="{{logintoken}}">
+            <input type="hidden" name="username" value="guest">
+            <input type="hidden" name="password" value="guest">
+            <button class="idep-btn idep-btn--outline" type="submit" id="loginguestbtn">{{#str}}loginasguest{{/str}}</button>
+        </form>
+    {{/canloginasguest}}
+</div>
+
+{{#js}}
+    {{^error}}
+        {{#autofocusform}}
+            (function() {
+                var u = document.getElementById('username');
+                var p = document.getElementById('password');
+                if (u && u.value.length === 0) { u.focus(); } else if (p) { p.focus(); }
+            })();
+        {{/autofocusform}}
+    {{/error}}
+    {{#error}}
+        (function() {
+            var u = document.getElementById('username');
+            if (u) { u.focus(); }
+        })();
+    {{/error}}
+    (function() {
+        var btn = document.querySelector('.idep-pass-toggle');
+        var input = document.getElementById('password');
+        if (!btn || !input) { return; }
+        btn.addEventListener('click', function() {
+            var show = input.type === 'password';
+            input.type = show ? 'text' : 'password';
+            btn.setAttribute('aria-pressed', show ? 'true' : 'false');
+            btn.setAttribute('aria-label', show ? btn.dataset.labelHide : btn.dataset.labelShow);
+            btn.classList.toggle('is-visible', show);
+        });
+    })();
+    require(['core_form/submit'], function(Submit) {
+        Submit.init("loginbtn");
+        {{#canloginasguest}}
+            Submit.init("loginguestbtn");
+        {{/canloginasguest}}
+    });
+{{/js}}

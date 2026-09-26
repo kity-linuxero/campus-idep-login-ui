@@ -2,9 +2,9 @@
 
 Maqueta visual (HTML + CSS) de la pantalla de inicio de sesión del **Campus Virtual IDEP**
 (Instituto de Estudios sobre Estado y Participación — ATE Provincia de Buenos Aires / CTA Autónoma),
-pensada para portarse al tema de Moodle `theme_idep`.
+y su implementación en Moodle como tema `theme_idep` (carpeta [`moodle/`](moodle/)).
 
-No es un login funcional: es la referencia visual y de estilos para la plantilla `core/loginform`.
+`index.html` es la referencia visual; lo que corre en el campus es el tema de `moodle/theme_idep`.
 
 ## Vista previa
 
@@ -28,6 +28,10 @@ docs/screenshots/              Capturas usadas en este README
 prompts/                       Brief original y prompts usados para generar el diseño
 .claude/skills/superdesign/    Skill de Superdesign para seguir iterando con Claude Code
 CLAUDE.md                      Instrucciones del proyecto para agentes
+moodle/                        Implementación en Moodle 5.2 (ver moodle/README.md)
+  theme_idep/                  Tema hijo de Boost con este login
+  branding/fonts/              Barlow / Barlow Condensed servidas desde el propio servidor
+  deploy.sh                    Despliegue al contenedor del Moodle
 ```
 
 ## Composición
@@ -59,14 +63,19 @@ CLAUDE.md                      Instrucciones del proyecto para agentes
 - **Medidas**: inputs y botón de 52px con radio 10px; foco = borde verde + halo de 4px;
   tarjeta con padding 36/40px (24px en mobile); breakpoint mobile en `600px`.
 
-## Portar a `theme_idep`
+## En Moodle
 
-1. Reemplazar las rutas `images/...` por los assets del tema (`{{#pix}}` / `$OUTPUT->image_url()`).
-2. En el `<form>`: `action="{{loginurl}}"`, `method="post"`, `name="username"`, `name="password"`,
-   `name="rememberusername"` y el `<input type="hidden" name="logintoken">`.
-3. Apuntar "¿Olvidó su contraseña?" a `{{forgotpasswordurl}}`.
-4. Reemplazar el mail de ayuda de ejemplo (`campus@idep.org.ar`) por el real.
-5. El `<script>` de mostrar/ocultar contraseña es solo para la maqueta.
+El login ya está implementado en el tema **`theme_idep`** (tema hijo de Boost, Moodle 5.2). Detalles, mapeo
+maqueta → plantillas, trampas conocidas y verificación: **[`moodle/README.md`](moodle/README.md)**.
+
+- **Banner de campaña y mail de ayuda** se cambian desde la administración, sin código:
+  *Administración del sitio → Apariencia → Temas → IDEP*. El banner tiene fecha de fin ("Mostrar hasta").
+- **Si te sugieren un cambio en el login:**
+  1. probalo primero en `index.html` (y regenerá las capturas);
+  2. portalo a `moodle/theme_idep` (plantillas, CSS en `lib.php`, textos en `lang/`);
+  3. subí `$plugin->version` en `moodle/theme_idep/version.php`;
+  4. desplegá con `./moodle/deploy.sh` desde el host Proxmox y verificá;
+  5. commit y push.
 
 ## Diseño
 
@@ -76,7 +85,10 @@ Generado con [Superdesign](https://superdesign.dev) a partir del brief en
 
 ## Licencia
 
-[MIT](LICENSE) © 2026 Cristian O. Giambruni.
+La maqueta: [MIT](LICENSE) © 2026 Cristian O. Giambruni.
+
+`moodle/theme_idep` es un plugin de Moodle y se distribuye bajo GNU GPL v3 o posterior. Las fuentes de
+`moodle/branding/fonts` tienen licencia SIL OFL 1.1.
 
 Los logos y marcas (IDEP, ATE, CTA Autónoma y los institutos) pertenecen a sus respectivas
 organizaciones y no están cubiertos por la licencia MIT.
