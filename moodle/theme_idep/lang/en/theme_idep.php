@@ -14,6 +14,7 @@ $string['passwordplaceholder'] = 'Your password';
 $string['showpassword'] = 'Show password';
 $string['hidepassword'] = 'Hide password';
 $string['loginbutton'] = 'Log in';
+$string['or'] = 'or';
 $string['institutes'] = 'Our institutes';
 $string['institutesalt'] = 'IDEP institutes: IDEP Salud, CFP 410, IDEP Informática and CENS 453';
 

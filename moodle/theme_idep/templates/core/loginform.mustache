@@ -2,7 +2,9 @@
     @template core/loginform
 
     Override de theme_idep: formulario de login con el diseño del Campus IDEP
-    (título, inputs con íconos, mostrar/ocultar contraseña, botón INGRESAR).
+    (título, inputs con íconos, contraseña que se despliega al escribir el
+    usuario, mostrar/ocultar contraseña, INGRESAR y, debajo de un separador
+    "o", los proveedores de identidad como Google).
     Conserva todo lo funcional del core
     (token, errores, mantenimiento, recaptcha, proveedores de identidad,
     alta de cuenta e invitado si se habilitan). Sin selector de idioma ni
@@ -41,7 +43,7 @@
             <script>document.getElementById('anchor').value = location.hash;</script>
             <input type="hidden" name="logintoken" value="{{logintoken}}">
 
-            <div class="idep-field">
+            <div class="idep-field idep-field--user">
                 <label for="username" class="idep-label">
                     {{^canloginbyemail}}{{#str}}usernamelabel, theme_idep{{/str}}{{/canloginbyemail}}
                     {{#canloginbyemail}}{{#str}} usernameemail {{/str}}{{/canloginbyemail}}
@@ -57,6 +59,10 @@
                 </div>
             </div>
 
+            {{! Contraseña, "¿Olvidó…?" e INGRESAR se despliegan recién cuando hay un
+                usuario escrito o autocompletado (CSS con :has, ver lib.php). }}
+            <div class="idep-pass-step">
+            <div class="idep-pass-inner">
             <div class="idep-field">
                 <label for="password" class="idep-label">{{#str}} password {{/str}}</label>
                 <div class="idep-input-wrap">
@@ -99,14 +105,15 @@
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </button>
+            </div>
+            </div>
         </form>
     {{/showloginform}}
 
-    {{#cansignup}}
-        <p class="idep-help"><a class="idep-link" href="{{signupurl}}">{{#str}}loginstartsignup{{/str}}</a></p>
-    {{/cansignup}}
-
     {{#hasidentityproviders}}
+        {{#showloginform}}
+            <div class="idep-or">{{#str}}or, theme_idep{{/str}}</div>
+        {{/showloginform}}
         <div class="idep-providers">
             {{#identityproviders}}
                 <a class="idep-btn idep-btn--outline" href="{{url}}">
@@ -116,6 +123,10 @@
             {{/identityproviders}}
         </div>
     {{/hasidentityproviders}}
+
+    {{#cansignup}}
+        <p class="idep-help"><a class="idep-link" href="{{signupurl}}">{{#str}}loginstartsignup{{/str}}</a></p>
+    {{/cansignup}}
 
     {{#canloginasguest}}
         <form action="{{loginurl}}" method="post" id="guestlogin" class="idep-providers">
@@ -143,6 +154,24 @@
             if (u) { u.focus(); }
         })();
     {{/error}}
+    (function() {
+        // Despliega la contraseña cuando el usuario tiene texto o lo autocompletó
+        // el navegador (Chrome no recalcula :has() al autocompletar).
+        var form = document.getElementById('login');
+        var u = document.getElementById('username');
+        if (!form || !u) { return; }
+        var sync = function(ev) {
+            // Si la persona edita el campo, manda el texto: Chrome sigue marcándolo
+            // como autocompletado un instante después de borrarlo.
+            var autofilled = false;
+            if (!ev || ev.type === 'animationstart') {
+                try { autofilled = u.matches(':-webkit-autofill'); } catch (e) { autofilled = false; }
+            }
+            form.classList.toggle('is-user-filled', u.value !== '' || autofilled);
+        };
+        ['input', 'change', 'animationstart'].forEach(function(ev) { u.addEventListener(ev, sync); });
+        sync();
+    })();
     (function() {
         var btn = document.querySelector('.idep-pass-toggle');
         var input = document.getElementById('password');

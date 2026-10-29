@@ -12,7 +12,7 @@
 - Primary button "Ingresar".
 - Link "¿Olvidó su contraseña?".
 - Free copy allowed: short welcome headline, subtitle, small help/contact line, footer with the four institutes.
-- **FORBIDDEN**: language selector, cookie notice, generic stats ("500M users"), guest-access buttons, social login, any Moodle default chrome.
+- **FORBIDDEN**: language selector, cookie notice, generic stats ("500M users"), guest-access buttons, social login (except the single "Acceder con Google" button from Moodle's OAuth 2 plugin, placed below the form after an "o" divider), any Moodle default chrome.
 
 ## Brand assets (use exactly, never recreate)
 - `campusLogoSolo` — main logo "IDEP Campus Virtual" (green #00922f-ish fill, black outline, black ribbon with white text, black script "Virtual"). Transparent PNG. **Must sit on white or very light background** — it loses contrast on green or black.

@@ -42,7 +42,9 @@ Las clases de la maqueta se renombraron con prefijo `idep-` porque varias chocan
 | `.logo-container` | `.idep-logo` | | `.btn-primary` | `.idep-btn` |
 | `.divider` | `.idep-divider` | | `.footer` | `.idep-footer` |
 | `h1` | `.idep-title` | | `.institutes-img` | `.idep-institutes` |
-| | | | `.copyright` | `.idep-copyright` |
+| `.form-group--user` | `.idep-field--user` | | `.copyright` | `.idep-copyright` |
+| `.pass-step` / `.pass-inner` | `.idep-pass-step` / `.idep-pass-inner` | | `.or-divider` | `.idep-or` |
+| `.btn-outline` | `.idep-btn--outline` (dentro de `.idep-providers`) | | | |
 
 Diferencias deliberadas con la maqueta:
 
@@ -106,6 +108,12 @@ Diferencias deliberadas con la maqueta:
 8. **Probar desde la red interna:** no usar `curl -L` contra el dominio (el segundo salto sale a internet), y
    la cookie de sesión es `Secure`, así que los flujos con sesión se prueban por HTTPS a través del proxy.
 9. **Configuración por SQL** queda tapada por la caché de Moodle: usar `php admin/cli/cfg.php`.
+10. **Contraseña plegada y autocompletado de Chrome.** La contraseña, "¿Olvidó…?" e INGRESAR se pliegan con
+    `.idep-form:not(.is-user-filled):has(#username:placeholder-shown)`. Chrome no recalcula `:has()` cuando
+    autocompleta, así que el JS de `core/loginform` pone `.is-user-filled` (escucha `input`, `change` y el
+    `animationstart` de una animación vacía sobre `:-webkit-autofill`). Al editar el campo cuenta solo el texto:
+    Chrome sigue marcándolo como autocompletado un instante después de borrarlo. Para probarlo, que la pestaña
+    esté visible: en segundo plano Chrome no avanza la transición y se leen estados intermedios.
 
 ## Requisitos del servidor
 

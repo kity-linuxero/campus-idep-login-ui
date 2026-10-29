@@ -361,6 +361,89 @@ body.idep-login-page .idep-help {
     margin: 0;
 }
 
+/* Proveedores de identidad (Google) debajo del formulario, separados de
+   INGRESAR por una línea con "o". */
+body.idep-login-page .idep-providers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+body.idep-login-page .idep-providers .idep-btn {
+    margin-bottom: 0;
+}
+
+body.idep-login-page .idep-or {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--idep-ink-500);
+    white-space: nowrap;
+}
+
+body.idep-login-page .idep-or::before,
+body.idep-login-page .idep-or::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--idep-line);
+}
+
+/* Contraseña, "¿Olvidó…?" e INGRESAR se despliegan cuando el usuario tiene
+   texto (escrito, autocompletado o devuelto tras un login fallido). Mientras
+   el campo muestra el placeholder quedan plegados. Navegadores sin :has
+   ignoran la regla de plegado y muestran todo, como antes. */
+body.idep-login-page .idep-field--user {
+    margin-bottom: 0;
+}
+
+body.idep-login-page .idep-pass-step {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows 250ms ease, opacity 200ms ease 50ms, visibility 0s;
+}
+
+/* Padding lateral + margen negativo: que el overflow no corte el anillo de
+   foco de los inputs ni el outline del botón. */
+body.idep-login-page .idep-pass-inner {
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 4px;
+    margin: 0 -4px -6px;
+}
+
+body.idep-login-page .idep-pass-inner > .idep-field:first-child {
+    margin-top: 18px;
+}
+
+body.idep-login-page .idep-pass-inner::after {
+    content: "";
+    display: block;
+    height: 6px;
+}
+
+/* Chrome no recalcula :has() cuando autocompleta: el JS de loginform agrega
+   .is-user-filled (con el truco de animationstart sobre :-webkit-autofill). */
+body.idep-login-page #username:-webkit-autofill {
+    animation: idep-autofill 1ms;
+}
+
+@keyframes idep-autofill {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+body.idep-login-page .idep-form:not(.is-user-filled):has(#username:placeholder-shown) .idep-pass-step {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    transition: grid-template-rows 250ms ease, opacity 150ms ease, visibility 0s linear 250ms;
+}
+
 /* Formularios estándar de Moodle dentro de la tarjeta (p. ej. "¿Olvidó su
    contraseña?", que usa este mismo layout): etiquetas arriba del campo y la
    misma tipografía/medidas que el login. */
@@ -529,6 +612,9 @@ body.idep-login-page .idep-copyright {
         animation: none;
         opacity: 1;
         transform: none;
+    }
+    body.idep-login-page .idep-pass-step {
+        transition: none;
     }
     body.idep-login-page .idep-btn:hover,
     body.idep-login-page .idep-banner a:hover img {

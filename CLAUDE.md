@@ -10,7 +10,7 @@ Login del Campus Virtual IDEP (Moodle 5.2). Dos piezas que tienen que mantenerse
 
 - El sistema de diseño está en `.superdesign/design-system.md` y es una restricción, no una sugerencia: solo verde IDEP (`#00792f` y sus tonos), negro, blanco y grises neutros; solo Barlow y Barlow Condensed.
 - El logo (`images/campusLogoSolo.png`) va siempre sobre blanco. La fila de institutos es negra: sobre fondo oscuro se usa con `filter: invert(1)`. Nunca reemplazar el logo por texto, iniciales o un SVG inventado.
-- Prohibido en la pantalla: selector de idioma, aviso de cookies, estadísticas genéricas, acceso de invitados, login social.
+- Prohibido en la pantalla: selector de idioma, aviso de cookies, estadísticas genéricas, acceso de invitados, login social (salvo "Acceder con Google", que viene del plugin OAuth 2 de Moodle y va debajo del formulario, tras un separador "o").
 
 ## Flujo para un cambio en el login
 
